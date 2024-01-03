@@ -17,4 +17,10 @@ h1 {
     padding: 10px;
     border: 3px solid black;
     text-align: center;
+    font-weight: bold;
+    font-size: 100px;
+}
+
+p {
+    display: inline-block;
 }
