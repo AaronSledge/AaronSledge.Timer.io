@@ -1,13 +1,22 @@
 
 
 function startBtn() {
-    let date = document.getElementById("time").valueAsDate;
-    let currentDate = new Date();
+    const date = document.getElementById("time").valueAsDate;
+    const currentDate = new Date();
     let miliseconds = Math.abs(currentDate - date);
     let seconds = miliseconds / 1000;
     seconds = Math.round(seconds);
     convert(seconds);
     document.getElementById("result").innerText = date.getUTCFullYear() + " " + currentDate.getFullYear() + " " + date.getUTCDay() + " " + miliseconds + " " + seconds;
+    let timer = setInterval(function() {
+        if (seconds >= 0) {
+            convert(seconds)
+            seconds--;
+        }
+        else {
+            clearInterval(timer);
+        }
+    }, 1000)
 }
 
 function convert(seconds) {
@@ -27,7 +36,7 @@ function convert(seconds) {
 }
 
 function display(days, hours, minutes, displaySeconds) {
-    document.getElementById("day").innerText = days;
+    document.getElementById("day").innerText = days + ":";
     document.getElementById("hour").innerText = hours + ":";
     document.getElementById("minute").innerText = minutes + ":";
     document.getElementById("second").innerText = displaySeconds;
