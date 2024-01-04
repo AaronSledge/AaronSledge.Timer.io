@@ -3,11 +3,15 @@
 function startBtn() {
     const date = document.getElementById("time").valueAsDate;
     const currentDate = new Date();
-    let miliseconds = Math.abs(currentDate - date);
+    let utc = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
+    let miliseconds = Math.abs(currentDate - utc);
+
+    console.log(date.getUTCHours());
+    console.log(currentDate.getHours());
+
     let seconds = miliseconds / 1000;
     seconds = Math.round(seconds);
     convert(seconds);
-    document.getElementById("result").innerText = date.getUTCFullYear() + " " + currentDate.getFullYear() + " " + date.getUTCDay() + " " + miliseconds + " " + seconds;
     let timer = setInterval(function() {
         if (seconds >= 0) {
             convert(seconds)
