@@ -1,26 +1,32 @@
-
+let btn = document.getElementById("start");
 
 function startBtn() {
     const date = document.getElementById("time").valueAsDate;
     const currentDate = new Date();
     let utc = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
-    let miliseconds = Math.abs(currentDate - utc);
+    let miliseconds = utc - currentDate;
 
-    console.log(date.getUTCHours());
-    console.log(currentDate.getHours());
+    if (!invalidDate(miliseconds)) {
+        alert("Invalid date selected. Please try again.");
+    }
 
-    let seconds = miliseconds / 1000;
-    seconds = Math.round(seconds);
-    convert(seconds);
-    let timer = setInterval(function() {
-        if (seconds >= 0) {
-            convert(seconds)
-            seconds--;
-        }
-        else {
-            clearInterval(timer);
-        }
-    }, 1000)
+    else {
+        disable();
+        let seconds = miliseconds / 1000;
+        seconds = Math.round(seconds);
+        convert(seconds);
+        let timer = setInterval(function() {
+            if (seconds >= 0) {
+                convert(seconds)
+                seconds--;
+            }
+            else {
+                clearInterval(timer);
+                enable();
+            }
+        }, 1000)
+    }
+
 }
 
 function convert(seconds) {
@@ -44,4 +50,21 @@ function display(days, hours, minutes, displaySeconds) {
     document.getElementById("hour").innerText = hours + ":";
     document.getElementById("minute").innerText = minutes + ":";
     document.getElementById("second").innerText = displaySeconds;
+}
+
+function disable() {
+    btn.disabled = "disabled";
+}
+
+function enable() {
+    btn.disabled = false;
+}
+
+function invalidDate(miliseconds) {
+    if (miliseconds < 0) {
+        return false;
+    }
+    else {
+        return true;
+    }
 }
