@@ -1,11 +1,11 @@
 let btn = document.getElementById("start");
+let doneSound = new Audio("done.wav");
 
 function startBtn() {
     const date = document.getElementById("time").valueAsDate;
     const currentDate = new Date();
     let utc = new Date(date.getTime() + date.getTimezoneOffset() * 60000);
     let miliseconds = utc - currentDate;
-
     if (!invalidDate(miliseconds)) {
         alert("Invalid date selected. Please try again.");
     }
@@ -23,6 +23,7 @@ function startBtn() {
             else {
                 clearInterval(timer);
                 enable();
+                doneSound.play();
             }
         }, 1000)
     }
