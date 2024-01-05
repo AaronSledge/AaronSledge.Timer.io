@@ -1,1 +1,1 @@
-# A simple timer using html, css, javascript
+# A simple timer using html, css, javascript. This project uses the date object for our calculations. Simply choose a date you want to pick and press the start button and you will see the time countdown. It's important to note that when you pick a date, the time is automatically set to midnight.
